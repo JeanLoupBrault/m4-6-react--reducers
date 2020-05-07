@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Tippy from '@tippy.js/react';
 import VisuallyHidden from '@reach/visually-hidden';
-import { Icon } from 'react-icons-kit';
-import { checkCircle } from 'react-icons-kit/feather/checkCircle';
+// import { Icon } from 'react-icons-kit';
+// import { checkCircle } from 'react-icons-kit/feather/checkCircle';
 
 import seatImageSrc from '../assets/seat-available.svg';
 import { getRowName, getSeatNum, encodeSeatId } from '../helpers';
@@ -12,35 +12,35 @@ import UnstyledButton from './UnstyledButton';
 import { BookingContext } from './BookingContext';
 
 const Seat = ({ rowIndex, seatIndex, width, height, price, status }) => {
-  const {
-    actions: { beginBookingProcess },
-  } = React.useContext(BookingContext);
+    const {
+        actions: { beginBookingProcess },
+    } = React.useContext(BookingContext);
 
-  const rowName = getRowName(rowIndex);
-  const seatNum = getSeatNum(seatIndex);
+    const rowName = getRowName(rowIndex);
+    const seatNum = getSeatNum(seatIndex);
 
-  const seatId = encodeSeatId(rowIndex, seatIndex);
+    const seatId = encodeSeatId(rowIndex, seatIndex);
 
-  return (
-    <Tippy content={`Row ${rowName}, Seat ${seatNum} – $${price}`}>
-      <Wrapper
-        disabled={status === 'unavailable'}
-        onClick={() => {
-          beginBookingProcess({ seatId, price });
-        }}
-      >
-        <VisuallyHidden>
-          Seat number {seatNum} in Row {rowName}
-        </VisuallyHidden>
-        <img src={seatImageSrc} alt="" style={{ width, height }} />
-        {seatIndex === 3 && rowIndex === 1 && (
-          <IconWrapper>
-            <Icon icon={checkCircle} />
-          </IconWrapper>
-        )}
-      </Wrapper>
-    </Tippy>
-  );
+    return (
+        <Tippy content={`Row ${rowName}, Seat ${seatNum} – $${price}`}>
+            <Wrapper
+                disabled={status === 'unavailable'}
+                onClick={() => {
+                    beginBookingProcess({ seatId, price });
+                }}
+            >
+                <VisuallyHidden>
+                    Seat number {seatNum} in Row {rowName}
+                </VisuallyHidden>
+                <img src={seatImageSrc} alt="" style={{ width, height }} />
+                {seatIndex === 3 && rowIndex === 1 && (
+                    // <IconWrapper>
+                    //     <Icon icon={checkCircle} />
+                    // </IconWrapper>
+                )}
+            </Wrapper>
+        </Tippy>
+    );
 };
 
 const Wrapper = styled(UnstyledButton)`
@@ -51,19 +51,19 @@ const Wrapper = styled(UnstyledButton)`
   }
 `;
 
-const IconWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: -5px;
-  padding: 3px;
-  background: white;
-  border-radius: 100%;
-  color: #009961;
+// const IconWrapper = styled.div`
+//   position: absolute;
+//   bottom: 0;
+//   right: -5px;
+//   padding: 3px;
+//   background: white;
+//   border-radius: 100%;
+//   color: #009961;
 
-  & svg,
-  & i {
-    display: block !important;
-  }
-`;
+//   & svg,
+//   & i {
+//     display: block !important;
+//   }
+// `;
 
 export default Seat;

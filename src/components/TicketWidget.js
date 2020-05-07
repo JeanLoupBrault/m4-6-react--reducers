@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+//import UnstyledButton from './UnstyledButton';
 import { getRowName, getSeatNum } from '../helpers';
 import { range } from '../utils';
 //import Seat from '../../__solution/src/components/Seat';
-import Seat from './Seat';
+import Seat from './Seat2';
 //import seatAvailable from `./src/assets/seat-available.svg`;
 import { SeatContext } from './SeatContext';
 
-const TicketWidget = () => {
+function TicketWidget() {
   // TODO: use values from Context
   const {
     state: { hasLoaded, seats, numOfRows, seatsPerRow },
@@ -17,7 +17,7 @@ const TicketWidget = () => {
   // const numOfRows = 8; //before 6
   // const seatsPerRow = 12; //before 6
   // const seatAvailable = () => {
-  //   return <img alt="Seats available" src=`${seatAvailable}` />;
+  //   return <img alt="Seats available" src={seatAvailable} />;
   // };
 
   // TODO: implement the loading spinner <CircularProgress />
@@ -46,7 +46,7 @@ const TicketWidget = () => {
                     width={36}
                     height={36}
                     price={seat.price}
-                    stauts={seat.isBooked ? 'unavailable' : 'available'}
+                    status={seat.isBooked ? 'unavailable' : 'available'}
                   />
 
                 </SeatWrapper>
@@ -64,6 +64,7 @@ const Wrapper = styled.div`
   border: 1px solid #ccc;
   border-radius: 3px;
   padding: 8px;
+  /* &:hover :disabled img{filter: grayscale(100%)}; */
 `;
 
 const Row = styled.div`
@@ -77,10 +78,24 @@ const Row = styled.div`
 
 const RowLabel = styled.div`
   font-weight: bold;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  transform: translateX(calc(-100% - 30px));
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  line-height: 46px;
 `;
 
 const SeatWrapper = styled.div`
   padding: 5px;
+  /* postition: relative; */
+/* &:hover :disabled img{filter: grayscale(100%)}; */
 `;
+
+
 
 export default TicketWidget;

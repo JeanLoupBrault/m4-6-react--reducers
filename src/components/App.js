@@ -1,33 +1,52 @@
 import React from 'react';
+import styled from 'styled-components';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import GlobalStyles from './GlobalStyles';
-import { SeatContext } from './SeatContext';
 import TicketWidget from './TicketWidget';
-import styled from 'styled-components';
+import PurchaseModal from './PurchaseModal';
+import { SeatContext } from './SeatContext';
+import { BookingContext } from './BookingContext';
+
+import 'tippy.js/dist/tippy.css';
 
 function App() {
-  const {
-    state: { numOfRows },
-    actions: { receiveSeatInfoFromServer },
-  } = React.useContext(SeatContext);
+    const {
+        actions: { receiveSeatInfoFromServer },
+    } = React.useContext(SeatContext);
+    const {
+        actions: { clearSnackbar },
+        status,
+    } = React.useContext(BookingContext);
 
-  React.useEffect(() => {
-    fetch('/api/seat-availability')
-      .then(res => res.json())
-      // .then(data => console.log(data));
-      .then(receiveSeatInfoFromServer);
-  }, [receiveSeatInfoFromServer]);
+    React.useEffect(() => {
+        fetch('/api/seat-availability')
+            .then(res => res.json())
+            .then(receiveSeatInfoFromServer);
+    }, [receiveSeatInfoFromServer]);
 
-  return (
-    <>
-      <GlobalStyles />
-      TODO: write code
-      This venue has {numOfRows} rows!
-      <Centered>
-        <TicketWidget />
-      </Centered>
-    </>
-  );
+    return (
+        <>
+            <GlobalStyles />
+
+            <Centered>
+                <TicketWidget />
+            </Centered>
+
+            <PurchaseModal />
+            <Snackbar open={status === 'purchased'} severity="success">
+                <Alert
+                    severity="success"
+                    onClose={clearSnackbar}
+                    elevation={6}
+                    variant="filled"
+                >
+                    Successfully purchased ticket! Enjoy the show.
+        </Alert>
+            </Snackbar>
+        </>
+    );
 }
 
 const Centered = styled.div`

@@ -128,8 +128,8 @@ const PurchaseModal = () => {
             {status === 'awaiting-response' ? (
               <CircularProgress size={24} color="inherit" />
             ) : (
-              'Purchase'
-            )}
+                'Purchase'
+              )}
           </PurchaseButton>
         </Row>
         {error && <Error>{error}</Error>}
