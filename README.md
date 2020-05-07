@@ -137,7 +137,7 @@ const initialState = {
   hasLoaded: false,
   seats: null,
   numOfRows: 0,
-  seatsPerRow: 0,
+  seatsPerRow: 0
 };
 
 function reducer(state, action) {
@@ -149,8 +149,8 @@ export const SeatProvider = ({ children }) => {
 
   const receiveSeatInfoFromServer = data => {
     dispatch({
-      type: 'receive-seat-info-from-server',
-      ...data,
+      type: "receive-seat-info-from-server",
+      ...data
     });
   };
 
@@ -159,8 +159,8 @@ export const SeatProvider = ({ children }) => {
       value={{
         state,
         actions: {
-          receiveSeatInfoFromServer,
-        },
+          receiveSeatInfoFromServer
+        }
       }}
     >
       {children}
@@ -302,7 +302,7 @@ const initialState = {
   hasLoaded: false,
   seats: null,
   numOfRows: 0,
-  seatsPerRow: 0,
+  seatsPerRow: 0
 };
 
 function reducer(state, action) {
@@ -396,7 +396,7 @@ Critically, you'll notice that there are 8 rows, with 12 seats per row. This is 
 _HINT:_ Remember, the image is provided in `src/assets/seat-available.svg`. Images can be `import`ed just like JS modules!
 
 ```js
-import happyMealSrc from '../__lecture/assets/happy-meal.jpg';
+import happyMealSrc from "../__lecture/assets/happy-meal.jpg";
 
 const McDonalds = () => {
   return <img alt="a meal with a toy" src={happyMealSrc} />;
@@ -471,7 +471,7 @@ First, if you haven't already, create a `Seat` component, and move the Seat tool
           width={36}
           height={36}
           price={seat.price}
-          status={seat.isBooked ? 'unavailable' : 'available'}
+          status={seat.isBooked ? "unavailable" : "available"}
         />
       </SeatWrapper>
     );
@@ -505,10 +505,10 @@ Let's create another context component, `BookingContext`. Follow many of the sam
 
 ```js
 const initialState = {
-  status: 'idle',
+  status: "idle",
   error: null,
   selectedSeatId: null,
-  price: null,
+  price: null
 };
 ```
 
@@ -568,8 +568,8 @@ Your goal should be to create a UI that looks something like this, pulling all r
 You can also create two new pieces of React state: `creditCard` and `expiration`. Use the `useState` hook for both of these pieces of state:
 
 ```js
-const [creditCard, setCreditCard] = React.useState('');
-const [expiration, setExpiration] = React.useState('');
+const [creditCard, setCreditCard] = React.useState("");
+const [expiration, setExpiration] = React.useState("");
 ```
 
 You should update this state when the user types in the text inputs, so that the React state is always in sync with what's shown on the page form.
